@@ -3,100 +3,150 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WanderPlan - One-Page Trip Planner</title>
+    <title>Kyoto Explorer - Trip Showcase</title>
     <style>
         :root {
-            --primary: #2563eb;
-            --secondary: #0ea5e9;
-            --dark: #1e293b;
-            --light: #f8fafc;
-            --success: #22c55e;
+            --accent: #e11d48;
+            --dark: #0f172a;
+            --muted: #475569;
+            --bg: #f8fafc;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, sans-serif; }
-        body { background: var(--light); color: var(--dark); padding: 20px; }
-        header { text-align: center; margin-bottom: 30px; background: linear-gradient(135deg, var(--primary), var(--secondary)); padding: 40px 20px; color: white; border-radius: 12px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto; }
-        .card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
-        h2 { margin-bottom: 15px; color: var(--primary); border-bottom: 2px solid var(--light); padding-bottom: 5px; }
-        input, button { width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; }
-        button { background: var(--primary); color: white; border: none; font-weight: bold; cursor: pointer; }
-        button:hover { background: #1d4ed8; }
-        ul { list-style: none; }
-        li { padding: 10px; background: var(--light); margin-bottom: 8px; border-radius: 6px; display: flex; justify-content: space-between; align-items: center; }
-        .delete-btn { width: auto; margin: 0; padding: 4px 8px; background: #ef4444; }
-        .delete-btn:hover { background: #dc2626; }
-        .checked { text-decoration: line-through; opacity: 0.6; }
+        body { background: var(--bg); color: var(--dark); line-height: 1.6; }
+        
+        /* Hero Section */
+        .hero { 
+            background: linear-gradient(rgba(15, 23, 42, 0.6), rgba(15, 23, 42, 0.8)), url('https://unsplash.com') center/cover;
+            color: white; 
+            padding: 80px 20px; 
+            text-align: center;
+        }
+        .hero h1 { font-size: 2.5rem; margin-bottom: 10px; }
+        .hero p { font-size: 1.1rem; opacity: 0.9; max-width: 600px; margin: 0 auto; }
+        
+        /* Stats Dashboard */
+        .stats { 
+            display: flex; 
+            justify-content: space-around; 
+            max-width: 800px; 
+            margin: -30px auto 40px; 
+            background: white; 
+            padding: 20px; 
+            border-radius: 12px; 
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+        }
+        .stat-item { text-align: center; }
+        .stat-item .num { font-size: 1.5rem; font-weight: bold; color: var(--accent); }
+        .stat-item .label { font-size: 0.8rem; color: var(--muted); text-transform: uppercase; }
+
+        /* Main Grid Content */
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; display: grid; grid-template-columns: 2fr 1fr; gap: 30px; }
+        @media (max-width: 768px) { .container { grid-template-columns: 1fr; } }
+
+        /* Timeline / Schedule */
+        .section-title { font-size: 1.5rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+        .timeline { border-left: 3px solid #cbd5e1; padding-left: 20px; margin-left: 10px; }
+        .timeline-item { position: relative; margin-bottom: 30px; }
+        .timeline-item::before { 
+            content: ''; 
+            position: absolute; 
+            left: -28px; 
+            top: 5px; 
+            width: 12px; 
+            height: 12px; 
+            border-radius: 50%; 
+            background: var(--accent); 
+            border: 3px solid white;
+        }
+        .time { font-size: 0.85rem; font-weight: bold; color: var(--accent); }
+        .timeline-card { background: white; padding: 15px; border-radius: 8px; margin-top: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .timeline-card h4 { margin-bottom: 5px; }
+        .timeline-card p { font-size: 0.9rem; color: var(--muted); }
+
+        /* Sidebar Cards */
+        .sidebar { display: flex; flex-direction: column; gap: 20px; }
+        .sidebar-panel { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+        .sidebar-panel h3 { margin-bottom: 15px; font-size: 1.2rem; }
+        .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .gallery img { width: 100%; height: 80px; object-fit: cover; border-radius: 6px; cursor: pointer; transition: transform 0.2s; }
+        .gallery img:hover { transform: scale(1.05); }
+        .tag-list { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; }
+        .tag { background: #ffe4e6; color: var(--accent); padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: 500; }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>📍 WanderPlan</h1>
-        <p>Your Ultimate Single-Page Trip Companion</p>
+    <!-- Hero Header Component -->
+    <header class="hero">
+        <h1>🌸 Kyoto Autumn Getaway</h1>
+        <p>A curated 3-day itinerary exploring historic temples, bamboo groves, and traditional tea houses in Japan's cultural heart.</p>
     </header>
 
-    <div class="grid">
-        <!-- Section 1: Trip Details -->
-        <div class="card">
-            <h2>✈️ Destination</h2>
-            <input type="text" id="destInput" placeholder="Where are you going?">
-            <input type="date" id="dateInput">
-            <button onclick="saveDetails()">Save Trip Details</button>
-            <p id="tripDisplay" style="margin-top: 15px; font-weight: bold; text-align: center;"></p>
-        </div>
+    <!-- High-level Trip Meta Dashboard -->
+    <section class="stats">
+        <div class="stat-item"><div class="num">3 Days</div><div class="label">Duration</div></div>
+        <div class="stat-item"><div class="num">$650</div><div class="label">Est. Budget</div></div>
+        <div class="stat-item"><div class="num">Solo</div><div class="label">Trip Style</div></div>
+    </section>
 
-        <!-- Section 2: Itinerary Builder -->
-        <div class="card">
-            <h2>📅 Itinerary</h2>
-            <input type="text" id="activityInput" placeholder="e.g., Visit Eiffel Tower">
-            <input type="time" id="timeInput">
-            <button onclick="addActivity()">Add Activity</button>
-            <ul id="itineraryList"></ul>
-        </div>
+    <!-- Main Content Area -->
+    <main class="container">
+        
+        <!-- Interactive Itinerary Section -->
+        <section>
+            <h2 class="section-title">📅 Daily Itinerary Schedule</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <span class="time">DAY 1 · MORNING</span>
+                    <div class="timeline-card">
+                        <h4>Fushimi Inari Shrine</h4>
+                        <p>Hike early through thousands of vibrant vermilion torii gates up Mount Inari to avoid large midday crowds.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <span class="time">DAY 1 · AFTERNOON</span>
+                    <div class="timeline-card">
+                        <h4>Kiyomizu-dera Temple</h4>
+                        <p>Explore the historic wooden stage offering sweeping panoramic vistas over the hillside cherry and maple trees.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <span class="time">DAY 2 · ALL DAY</span>
+                    <div class="timeline-card">
+                        <h4>Arashiyama Bamboo Grove</h4>
+                        <p>Stroll the towering green stalks, visit the nearby Tenryu-ji landscape garden, and cross Togetsukyo Bridge.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        <!-- Section 3: Packing Checklist -->
-        <div class="card">
-            <h2>🧳 Packing List</h2>
-            <input type="text" id="itemInput" placeholder="e.g., Passport, Charger">
-            <button onclick="addItem()">Add Item</button>
-            <ul id="packingList"></ul>
-        </div>
-    </div>
+        <!-- Dynamic Sidebar Panels -->
+        <aside class="sidebar">
+            <!-- Visual Asset Gallery -->
+            <div class="sidebar-panel">
+                <h3>📸 Route Highlights</h3>
+                <div class="gallery">
+                    <img src="https://unsplash.com" alt="Kyoto temple" onclick="alert('Viewing: Kiyomizu-dera')">
+                    <img src="https://unsplash.com" alt="Torii gates" onclick="alert('Viewing: Fushimi Inari')">
+                    <img src="https://unsplash.com" alt="Gion streets" onclick="alert('Viewing: Gion District')">
+                    <img src="https://unsplash.com" alt="Bamboo forest" onclick="alert('Viewing: Arashiyama')">
+                </div>
+            </div>
 
-    <script>
-        // Save Destination Details
-        function saveDetails() {
-            const dest = document.getElementById('destInput').value;
-            const date = document.getElementById('dateInput').value;
-            if (!dest || !date) return alert('Please fill in all fields');
-            document.getElementById('tripDisplay').innerText = `🚀 Trip to ${dest} on ${date}!`;
-        }
+            <!-- Trip Logistics / Metadata Tags -->
+            <div class="sidebar-panel">
+                <h3>🎒 Quick Details</h3>
+                <ul class="tag-list">
+                    <li class="tag">🍁 Autumn Peak</li>
+                    <li class="tag">🚊 JR Pass Valid</li>
+                    <li class="tag">🍣 Foodie Friendly</li>
+                    <li class="tag">👟 Heavy Walking</li>
+                    <li class="tag">📷 Photography Tour</li>
+                </ul>
+            </div>
+        </aside>
 
-        // Add Activity to Itinerary
-        function addActivity() {
-            const activity = document.getElementById('activityInput').value;
-            const time = document.getElementById('timeInput').value;
-            if (!activity || !time) return alert('Please enter activity and time');
-            
-            const li = document.createElement('li');
-            li.innerHTML = `<span>⏰ ${time} - ${activity}</span> <button class="delete-btn" onclick="this.parentElement.remove()">X</button>`;
-            document.getElementById('itineraryList').appendChild(li);
-            
-            document.getElementById('activityInput').value = '';
-            document.getElementById('timeInput').value = '';
-        }
+    </main>
 
-        // Add Item to Packing List
-        function addItem() {
-            const item = document.getElementById('itemInput').value;
-            if (!item) return alert('Please enter an item');
-            
-            const li = document.createElement('li');
-            li.innerHTML = `<span onclick="this.classList.toggle('checked')" style="cursor:pointer;">⬜ ${item}</span> <button class="delete-btn" onclick="this.parentElement.remove()">X</button>`;
-            document.getElementById('packingList').appendChild(li);
-            
-            document.getElementById('itemInput').value = '';
-        }
-    </script>
 </body>
 </html>
