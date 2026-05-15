@@ -73,11 +73,12 @@
             title: "Channel Islands National Park Road Trip",
             description: "A scenic 5-day driving loop through lush temperate rainforests, rugged coastlines, and vibrant mountain towns.",
             heroImage: "https://unsplash.com",
-            accentColor: "#0d9488", // Teal hex code
+            accentColor: "#0d9488"
+            }, // Teal hex code
 
             stats: [
                 { label: "Duration", value: "4 Days" },
-                { label: "Accomendation", value: "$1123.62" },
+                { label: "Accomondation", value: "$1123.62" },
                 { label: "Driving Distance", value: "~650 Miles" }
             ],
 
@@ -85,7 +86,7 @@
                 { time: "Day 1 · Afternoon", title: "Drive", desc: "Drive all the way to Pismo Beach, CA 93449." },
                 { time: "Day 2 · Morning", title: "Driving", desc: "Drive all the way to Ventura, CA 93001." },
                 { time: "Day 2 · Afternoon", title: "Hiking", desc: "Take the boat ride at Ventura Marina and hike on Santa Cruz Island at Scorpion Anchorage." },
-                { time: "Day 3 · Morning & Partial Afternoon", title: "Hiking", desc: "Take the boat ride at Ventura Marina and hike on Santa Cruz Island at Prisoners Harbor. Return at 3PM." }
+                { time: "Day 3 · Morning & Partial Afternoon", title: "Hiking", desc: "Take the boat ride at Ventura Marina and hike on Santa Cruz Island at Prisoners Harbor. Return at 3PM." },
                 { time: "Day 3 · Evening", title: "Chilling", desc: "Chill at the hotel or explore in downtown Ventura. The hotel has a fitness center as well as an outdoor swimming pool." },
                 { time: "Day 4 · All Day", title: "Driving", desc: "Drive all the way back to San Jose, CA 95132." },
             ],
