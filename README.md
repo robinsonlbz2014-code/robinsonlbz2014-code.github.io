@@ -65,49 +65,30 @@
             <div class="timeline" id="itineraryTimeline"></div>
         </section>
 
-        <aside class="sidebar">
-            <div class="sidebar-panel">
-                <h3>📸 Gallery</h3>
-                <div class="gallery" id="imageGallery"></div>
-            </div>
-
-            <div class="sidebar-panel">
-                <h3>🎒 Quick Details</h3>
-                <ul class="tag-list" id="tagList"></ul>
-            </div>
-        </aside>
     </main>
 
     <script>
         // EDIT YOUR TRIP DATA DIRECTLY IN THIS CONFIGURATION OBJECT BELOW:
         const TRIP_CONFIG = {
-            title: "🌲 Pacific Northwest Road Trip",
+            title: "Channel Islands National Park Road Trip",
             description: "A scenic 5-day driving loop through lush temperate rainforests, rugged coastlines, and vibrant mountain towns.",
             heroImage: "https://unsplash.com",
             accentColor: "#0d9488", // Teal hex code
 
             stats: [
-                { label: "Duration", value: "5 Days" },
-                { label: "Est. Fuel", value: "$120" },
-                { label: "Style", value: "Road Trip" }
+                { label: "Duration", value: "4 Days" },
+                { label: "Accomendation", value: "$1123.62" },
+                { label: "Driving Distance", value: "~650 Miles" }
             ],
 
             itinerary: [
-                { time: "Day 1 · Morning", title: "Seattle Departure", desc: "Pick up the rental car and head west toward Olympic National Park via the Bainbridge ferry." },
-                { time: "Day 1 · Afternoon", title: "Rialto Beach", desc: "Hike along the rocky coastline to see towering sea stacks and dramatic driftwood logs." },
-                { time: "Day 2 · Morning", title: "Hoh Rain Forest", desc: "Walk the Hall of Mosses trail to view massive sitka spruce trees blanketed in hanging moss." },
-                { time: "Day 3 · All Day", title: "Cannon Beach", desc: "Cross into Oregon to view Haystack Rock and explore tide pools during the afternoon low tide." }
+                { time: "Day 1 · Afternoon", title: "Drive", desc: "Drive all the way to Pismo Beach, CA 93449." },
+                { time: "Day 2 · Morning", title: "Driving", desc: "Drive all the way to Ventura, CA 93001." },
+                { time: "Day 2 · Afternoon", title: "Hiking", desc: "Take the boat ride at Ventura Marina and hike on Santa Cruz Island at Scorpion Anchorage." },
+                { time: "Day 3 · Morning & Partial Afternoon", title: "Hiking", desc: "Take the boat ride at Ventura Marina and hike on Santa Cruz Island at Prisoners Harbor. Return at 3PM." }
+                { time: "Day 3 · Evening", title: "Chilling", desc: "Chill at the hotel or explore in downtown Ventura. The hotel has a fitness center as well as an outdoor swimming pool." },
+                { time: "Day 4 · All Day", title: "Driving", desc: "Drive all the way back to San Jose, CA 95132." },
             ],
-
-            galleryImages: [
-                "https://unsplash.com",
-                "https://unsplash.com",
-                "https://unsplash.com",
-                "https://unsplash.com"
-            ],
-
-            tags: ["🌲 Outdoors", "🚗 Scenic Drive", "🏕️ Camping Friendly", "👟 Hiking", "🌦️ Rain Gear Required"]
-        };
 
         // RENDER ENGINE (Do not modify unless you want to change layout mechanics)
         function renderTrip() {
@@ -137,14 +118,9 @@
             `).join('');
 
             // Render Gallery
-            document.getElementById('imageGallery').innerHTML = TRIP_CONFIG.galleryImages.map(imgSrc => `
-                <img src="${imgSrc}" alt="Trip Highlight Visual">
-            `).join('');
 
             // Render Tags
-            document.getElementById('tagList').innerHTML = TRIP_CONFIG.tags.map(tag => `
-                <li class="tag">${tag}</li>
-            `).join('');
+
         }
 
         // Initialize application build on load
