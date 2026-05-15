@@ -1,152 +1,154 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kyoto Explorer - Trip Showcase</title>
+    <title>Trip Plan Showcase</title>
     <style>
         :root {
-            --accent: #e11d48;
+            --accent: #0284c7;
             --dark: #0f172a;
             --muted: #475569;
             --bg: #f8fafc;
         }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, sans-serif; }
         body { background: var(--bg); color: var(--dark); line-height: 1.6; }
-        
-        /* Hero Section */
         .hero { 
-            background: linear-gradient(rgba(15, 23, 42, 0.6), rgba(15, 23, 42, 0.8)), url('https://unsplash.com') center/cover;
-            color: white; 
-            padding: 80px 20px; 
-            text-align: center;
+            background: linear-gradient(rgba(15, 23, 42, 0.6), rgba(15, 23, 42, 0.8)), var(--hero-img, #1e293b) center/cover;
+            color: white; padding: 80px 20px; text-align: center;
         }
         .hero h1 { font-size: 2.5rem; margin-bottom: 10px; }
         .hero p { font-size: 1.1rem; opacity: 0.9; max-width: 600px; margin: 0 auto; }
-        
-        /* Stats Dashboard */
         .stats { 
-            display: flex; 
-            justify-content: space-around; 
-            max-width: 800px; 
-            margin: -30px auto 40px; 
-            background: white; 
-            padding: 20px; 
-            border-radius: 12px; 
-            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+            display: flex; justify-content: space-around; max-width: 800px; 
+            margin: -30px auto 40px; background: white; padding: 20px; 
+            border-radius: 12px; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
         }
         .stat-item { text-align: center; }
         .stat-item .num { font-size: 1.5rem; font-weight: bold; color: var(--accent); }
         .stat-item .label { font-size: 0.8rem; color: var(--muted); text-transform: uppercase; }
-
-        /* Main Grid Content */
         .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; display: grid; grid-template-columns: 2fr 1fr; gap: 30px; }
         @media (max-width: 768px) { .container { grid-template-columns: 1fr; } }
-
-        /* Timeline / Schedule */
-        .section-title { font-size: 1.5rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+        .section-title { font-size: 1.5rem; margin-bottom: 20px; }
         .timeline { border-left: 3px solid #cbd5e1; padding-left: 20px; margin-left: 10px; }
         .timeline-item { position: relative; margin-bottom: 30px; }
         .timeline-item::before { 
-            content: ''; 
-            position: absolute; 
-            left: -28px; 
-            top: 5px; 
-            width: 12px; 
-            height: 12px; 
-            border-radius: 50%; 
-            background: var(--accent); 
-            border: 3px solid white;
+            content: ''; position: absolute; left: -28px; top: 5px; 
+            width: 12px; height: 12px; border-radius: 50%; 
+            background: var(--accent); border: 3px solid white;
         }
-        .time { font-size: 0.85rem; font-weight: bold; color: var(--accent); }
+        .time { font-size: 0.85rem; font-weight: bold; color: var(--accent); text-transform: uppercase; }
         .timeline-card { background: white; padding: 15px; border-radius: 8px; margin-top: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
         .timeline-card h4 { margin-bottom: 5px; }
         .timeline-card p { font-size: 0.9rem; color: var(--muted); }
-
-        /* Sidebar Cards */
         .sidebar { display: flex; flex-direction: column; gap: 20px; }
         .sidebar-panel { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
         .sidebar-panel h3 { margin-bottom: 15px; font-size: 1.2rem; }
         .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .gallery img { width: 100%; height: 80px; object-fit: cover; border-radius: 6px; cursor: pointer; transition: transform 0.2s; }
-        .gallery img:hover { transform: scale(1.05); }
+        .gallery img { width: 100%; height: 80px; object-fit: cover; border-radius: 6px; }
         .tag-list { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; }
-        .tag { background: #ffe4e6; color: var(--accent); padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: 500; }
+        .tag { background: #e0f2fe; color: var(--accent); padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: 500; }
     </style>
 </head>
 <body>
 
-    <!-- Hero Header Component -->
-    <header class="hero">
-        <h1>🌸 Kyoto Autumn Getaway</h1>
-        <p>A curated 3-day itinerary exploring historic temples, bamboo groves, and traditional tea houses in Japan's cultural heart.</p>
+    <!-- Target elements populated by JavaScript -->
+    <header class="hero" id="heroSection">
+        <h1 id="tripTitle"></h1>
+        <p id="tripDesc"></p>
     </header>
 
-    <!-- High-level Trip Meta Dashboard -->
-    <section class="stats">
-        <div class="stat-item"><div class="num">3 Days</div><div class="label">Duration</div></div>
-        <div class="stat-item"><div class="num">$650</div><div class="label">Est. Budget</div></div>
-        <div class="stat-item"><div class="num">Solo</div><div class="label">Trip Style</div></div>
-    </section>
+    <section class="stats" id="statsDashboard"></section>
 
-    <!-- Main Content Area -->
     <main class="container">
-        
-        <!-- Interactive Itinerary Section -->
         <section>
-            <h2 class="section-title">📅 Daily Itinerary Schedule</h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <span class="time">DAY 1 · MORNING</span>
-                    <div class="timeline-card">
-                        <h4>Fushimi Inari Shrine</h4>
-                        <p>Hike early through thousands of vibrant vermilion torii gates up Mount Inari to avoid large midday crowds.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <span class="time">DAY 1 · AFTERNOON</span>
-                    <div class="timeline-card">
-                        <h4>Kiyomizu-dera Temple</h4>
-                        <p>Explore the historic wooden stage offering sweeping panoramic vistas over the hillside cherry and maple trees.</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <span class="time">DAY 2 · ALL DAY</span>
-                    <div class="timeline-card">
-                        <h4>Arashiyama Bamboo Grove</h4>
-                        <p>Stroll the towering green stalks, visit the nearby Tenryu-ji landscape garden, and cross Togetsukyo Bridge.</p>
-                    </div>
-                </div>
-            </div>
+            <h2 class="section-title">📅 Itinerary</h2>
+            <div class="timeline" id="itineraryTimeline"></div>
         </section>
 
-        <!-- Dynamic Sidebar Panels -->
         <aside class="sidebar">
-            <!-- Visual Asset Gallery -->
             <div class="sidebar-panel">
-                <h3>📸 Route Highlights</h3>
-                <div class="gallery">
-                    <img src="https://unsplash.com" alt="Kyoto temple" onclick="alert('Viewing: Kiyomizu-dera')">
-                    <img src="https://unsplash.com" alt="Torii gates" onclick="alert('Viewing: Fushimi Inari')">
-                    <img src="https://unsplash.com" alt="Gion streets" onclick="alert('Viewing: Gion District')">
-                    <img src="https://unsplash.com" alt="Bamboo forest" onclick="alert('Viewing: Arashiyama')">
-                </div>
+                <h3>📸 Gallery</h3>
+                <div class="gallery" id="imageGallery"></div>
             </div>
 
-            <!-- Trip Logistics / Metadata Tags -->
             <div class="sidebar-panel">
                 <h3>🎒 Quick Details</h3>
-                <ul class="tag-list">
-                    <li class="tag">🍁 Autumn Peak</li>
-                    <li class="tag">🚊 JR Pass Valid</li>
-                    <li class="tag">🍣 Foodie Friendly</li>
-                    <li class="tag">👟 Heavy Walking</li>
-                    <li class="tag">📷 Photography Tour</li>
-                </ul>
+                <ul class="tag-list" id="tagList"></ul>
             </div>
         </aside>
-
     </main>
 
+    <script>
+        // EDIT YOUR TRIP DATA DIRECTLY IN THIS CONFIGURATION OBJECT BELOW:
+        const TRIP_CONFIG = {
+            title: "🌲 Pacific Northwest Road Trip",
+            description: "A scenic 5-day driving loop through lush temperate rainforests, rugged coastlines, and vibrant mountain towns.",
+            heroImage: "https://unsplash.com",
+            accentColor: "#0d9488", // Teal hex code
+
+            stats: [
+                { label: "Duration", value: "5 Days" },
+                { label: "Est. Fuel", value: "$120" },
+                { label: "Style", value: "Road Trip" }
+            ],
+
+            itinerary: [
+                { time: "Day 1 · Morning", title: "Seattle Departure", desc: "Pick up the rental car and head west toward Olympic National Park via the Bainbridge ferry." },
+                { time: "Day 1 · Afternoon", title: "Rialto Beach", desc: "Hike along the rocky coastline to see towering sea stacks and dramatic driftwood logs." },
+                { time: "Day 2 · Morning", title: "Hoh Rain Forest", desc: "Walk the Hall of Mosses trail to view massive sitka spruce trees blanketed in hanging moss." },
+                { time: "Day 3 · All Day", title: "Cannon Beach", desc: "Cross into Oregon to view Haystack Rock and explore tide pools during the afternoon low tide." }
+            ],
+
+            galleryImages: [
+                "https://unsplash.com",
+                "https://unsplash.com",
+                "https://unsplash.com",
+                "https://unsplash.com"
+            ],
+
+            tags: ["🌲 Outdoors", "🚗 Scenic Drive", "🏕️ Camping Friendly", "👟 Hiking", "🌦️ Rain Gear Required"]
+        };
+
+        // RENDER ENGINE (Do not modify unless you want to change layout mechanics)
+        function renderTrip() {
+            document.title = TRIP_CONFIG.title;
+            document.documentElement.style.setProperty('--accent', TRIP_CONFIG.accentColor);
+            document.getElementById('heroSection').style.setProperty('--hero-img', `url('${TRIP_CONFIG.heroImage}')`);
+            document.getElementById('tripTitle').innerText = TRIP_CONFIG.title;
+            document.getElementById('tripDesc').innerText = TRIP_CONFIG.description;
+
+            // Render Stats
+            document.getElementById('statsDashboard').innerHTML = TRIP_CONFIG.stats.map(s => `
+                <div class="stat-item">
+                    <div class="num">${s.value}</div>
+                    <div class="label">${s.label}</div>
+                </div>
+            `).join('');
+
+            // Render Itinerary
+            document.getElementById('itineraryTimeline').innerHTML = TRIP_CONFIG.itinerary.map(item => `
+                <div class="timeline-item">
+                    <span class="time">${item.time}</span>
+                    <div class="timeline-card">
+                        <h4>${item.title}</h4>
+                        <p>${item.desc}</p>
+                    </div>
+                </div>
+            `).join('');
+
+            // Render Gallery
+            document.getElementById('imageGallery').innerHTML = TRIP_CONFIG.galleryImages.map(imgSrc => `
+                <img src="${imgSrc}" alt="Trip Highlight Visual">
+            `).join('');
+
+            // Render Tags
+            document.getElementById('tagList').innerHTML = TRIP_CONFIG.tags.map(tag => `
+                <li class="tag">${tag}</li>
+            `).join('');
+        }
+
+        // Initialize application build on load
+        window.addEventListener('DOMContentLoaded', renderTrip);
+    </script>
 </body>
 </html>
